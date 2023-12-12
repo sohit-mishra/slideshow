@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #333333;
+            display: flex;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .slideshow {
+            width: 400px;
+            margin-top: 50px;
+            height: 500px;
+            background-color: aliceblue;
+            box-shadow: 0px 0px 8px 9px #fff;
+
+        }
+
+        img {
+            width: 100%;
+            max-height: 500px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .btn {
+            margin-top: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        button {
+            text-align: center;
+            border-radius: 10px;
+            padding: 15px 0;
+            border: 0;
+            width: 180px;
+            margin-top: 30px;
+            color: #333333;
+            font-weight: 660;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="slideshow">
+        <img src="https://images.unsplash.com/photo-1539252554453-80ab65ce3586?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjI3fHxmb29kfGVufDB8fDB8fHww"
+            alt="">
+        <div class="btn">
+            <button onclick="start()" id="start">Start</button>
+            <button onclick="stop()" id="stop">Stop</button>
+            <button onclick="next()" id="next">Next</button>
+            <button onclick="preview()" id="preview">Preview</button>
+        </div>
+    </div>
+    </div>
+</body>
+
+</html>
+
+<script>
+    var Imagelink = [
+        {
+            link: "https://images.unsplash.com/photo-1539252554453-80ab65ce3586?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjI3fHxmb29kfGVufDB8fDB8fHww"
+        },
+        {
+            link: "https://images.unsplash.com/photo-1596662951482-0c4ba74a6df6?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjIzfHxmb29kfGVufDB8fDB8fHww"
+        },
+        {
+            link: "https://images.unsplash.com/photo-1606149059549-6042addafc5a?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTg1fHxmb29kfGVufDB8fDB8fHww"
+        },
+        {
+            link: "https://images.unsplash.com/photo-1535007813616-79dc02ba4021?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTU3fHxmb29kfGVufDB8fDB8fHww"
+        },
+        {
+            link: "https://images.unsplash.com/photo-1535473895227-bdecb20fb157?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTU4fHxmb29kfGVufDB8fDB8fHww"
+        },
+        {
+            link: "https://images.unsplash.com/photo-1516100882582-96c3a05fe590?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTQ2fHxmb29kfGVufDB8fDB8fHww"
+        },
+        {
+            link: "https://images.unsplash.com/photo-1568093858174-0f391ea21c45?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTQ5fHxmb29kfGVufDB8fDB8fHww"
+        },
+        {
+            link: "https://images.unsplash.com/photo-1548940740-204726a19be3?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTI5fHxmb29kfGVufDB8fDB8fHww"
+        },
+        {
+            link: "https://images.unsplash.com/photo-1526318896980-cf78c088247c?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTMwfHxmb29kfGVufDB8fDB8fHww"
+        },
+        {
+            link: "https://images.unsplash.com/photo-1610440042657-612c34d95e9f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTI2fHxmb29kfGVufDB8fDB8fHww"
+        },
+        {
+            link: "https://images.unsplash.com/photo-1603105037880-880cd4edfb0d?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTI1fHxmb29kfGVufDB8fDB8fHww"
+        },
+        {
+            link: "https://images.unsplash.com/photo-1593584785033-9c7604d0863f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTE5fHxmb29kfGVufDB8fDB8fHww"
+        },
+        {
+            link: "https://images.unsplash.com/photo-1607013251379-e6eecfffe234?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTA3fHxmb29kfGVufDB8fDB8fHww"
+        },
+        {
+            link: "https://images.unsplash.com/photo-1559054663-e8d23213f55c?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTAxfHxmb29kfGVufDB8fDB8fHww"
+        },
+        {
+            link: "https://images.unsplash.com/photo-1518779578993-ec3579fee39f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OTd8fGZvb2R8ZW58MHx8MHx8fDA%3D"
+        },
+        {
+            link: "https://images.unsplash.com/photo-1604152135912-04a022e23696?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OTN8fGZvb2R8ZW58MHx8MHx8fDA%3D"
+        },
+        {
+            link: "https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8ODZ8fGZvb2R8ZW58MHx8MHx8fDA%3D"
+        },
+        {
+            link: "https://images.unsplash.com/photo-1568600891621-50f697b9a1c7?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8ODV8fGZvb2R8ZW58MHx8MHx8fDA%3D"
+        },
+        {
+            link: "https://images.unsplash.com/photo-1586511925558-a4c6376fe65f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nzh8fGZvb2R8ZW58MHx8MHx8fDA%3D"
+        },
+        {
+            link: "https://images.unsplash.com/photo-1488477181946-6428a0291777?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nzl8fGZvb2R8ZW58MHx8MHx8fDA%3D"
+        }
+    ];
+
+    var count = 19;
+    var img = document.querySelector("img");
+    var interval;
+
+    function start() {
+        interval = setInterval(next, 500);
+        document.querySelector('#start').style.backgroundColor = 'red';
+        document.querySelector('#start').style.color = '#fff';
+        document.querySelector('#start').disabled = true;
+    }
+
+    function stop() {
+        clearInterval(interval);
+        document.querySelector('#start').style.backgroundColor = '#fff';
+        document.querySelector('#start').style.color = '#333333';
+        document.querySelector('#start').disabled = false;
+    }
+
+    function next() {
+        if (count === Imagelink.length - 1) {
+            count = 0;
+            img.src = Imagelink[count].link;
+        } else {
+            count++;
+            img.src = Imagelink[count].link;
+        }
+    }
+
+    function preview(e) {
+        if (count === 0) {
+            count = Imagelink.length - 1;
+            img.src = Imagelink[count].link;
+        } else {
+            count--;
+            img.src = Imagelink[count].link;
+        }
+    }
+
+</script>
